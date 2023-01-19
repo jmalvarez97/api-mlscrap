@@ -4,9 +4,20 @@ from flask import Flask, request, jsonify
 import os
 from search.mlScrap import getData
 
+from selenium import webdriver
+from webdriver_manager.chrome import ChromeDriverManager
+
+
+
 # Init app
 app = Flask(__name__)
 
+chrome_options = webdriver.ChromeOptions()
+chrome_options.add_argument('--no-sandbox')
+chrome_options.add_argument('--headless')
+chrome_options.add_argument("--disable-infobars")
+chrome_options.add_argument('--disable-dev-shm-usage')
+chrome = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
 
 @app.route('/', methods=['GET'])
 def home():
@@ -19,8 +30,7 @@ def home():
 @app.route('/data', methods=['GET'])
 def data():
     query = request.args.get('search')
-    print(type(query))
-    return getData(query)
+    return getData(query, chrome)
     
 # A method that runs the application server.
 if __name__ == "__main__":

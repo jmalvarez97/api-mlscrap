@@ -1,14 +1,11 @@
 from flask import Flask, request, jsonify
 import json
-from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from lxml import html
 import requests
-from webdriver_manager.chrome import ChromeDriverManager
-
 
 
 
@@ -60,13 +57,13 @@ def obtenerProductosDetallados(lis, wd):
     return page
 
 
-def getData(query):
+def getData(query, chrome):
     '''
     Recibe una palabra y busca la primer pagina de todos los productos de mercado libre de esa palabra,
     con todas sus especificaciones
     '''
 
-    chrome = webdriver.Chrome(ChromeDriverManager().install())
+    
     chrome.get("https://www.mercadolibre.com.ar/")
 
     check_box_wait = EC.presence_of_element_located((By.ID, 'cb1-edit'))
