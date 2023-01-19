@@ -19,9 +19,10 @@ def home():
 @app.route('/data', methods=['GET'])
 def data():
     query = request.args.get('search')
+    print(type(query))
     return getData(query)
     
 # A method that runs the application server.
 if __name__ == "__main__":
     # Threaded option to enable multiple instances for multiple user access support
-    app.run(debug=True, threaded=True, port=5000)
+    app.run(debug=False, threaded=True, port=5000)

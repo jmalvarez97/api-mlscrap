@@ -7,6 +7,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from lxml import html
 import requests
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 
@@ -65,14 +66,7 @@ def getData(query):
     con todas sus especificaciones
     '''
 
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.add_argument('--headless')
-    chrome_options.add_argument('--no-sandbox')
-    chrome_options.add_argument('--disable-dev-shm-usage')
-    chrome = webdriver.Chrome('chromedriver',chrome_options=chrome_options)
-
-    
-    
+    chrome = webdriver.Chrome(ChromeDriverManager().install())
     chrome.get("https://www.mercadolibre.com.ar/")
 
     check_box_wait = EC.presence_of_element_located((By.ID, 'cb1-edit'))
