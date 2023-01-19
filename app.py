@@ -17,7 +17,7 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--headless')
 chrome_options.add_argument("--disable-infobars")
 chrome_options.add_argument('--disable-dev-shm-usage')
-chrome = webdriver.Chrome(ChromeDriverManager().install(), chrome_options=chrome_options)
+chrome = webdriver.Chrome("chromedriver", chrome_options=chrome_options)
 
 @app.route('/', methods=['GET'])
 def home():
