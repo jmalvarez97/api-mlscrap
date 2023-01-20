@@ -19,7 +19,7 @@ chrome_options.add_argument('--headless')
 # chrome_options.add_argument('--disable-dev-shm-usage')
 
 
-driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), chrome_options=chrome_options)
+driver = webdriver.Chrome("/opt/render/project/.render/chrome/opt/google/chrome/chrome", chrome_options=chrome_options)
 driver.maximize_window()
 
 @app.route('/', methods=['GET'])
