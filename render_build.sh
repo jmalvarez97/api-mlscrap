@@ -8,9 +8,9 @@ if [[ ! -d $STORAGE_DIR/chrome ]]; then
   echo "...Downloading Chrome"
   mkdir -p $STORAGE_DIR/chrome
   cd $STORAGE_DIR/chrome
-  wget -P ./ https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-  dpkg -x ./google-chrome-stable_current_amd64.deb $STORAGE_DIR/chrome
-  rm ./google-chrome-stable_current_amd64.deb
+  wget -P ./ https://chromedriver.storage.googleapis.com/108.0.5359.71/chromedriver_linux64.zip
+  unzip -d ./ chromedriver_linux64.zip
+  rm ./chromedriver_linux64.zip
   cd $HOME/project/src # Make sure we return to where we were
 else
   echo "...Using Chrome from cache"
