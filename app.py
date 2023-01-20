@@ -30,6 +30,7 @@ def home():
 @app.route('/data', methods=['GET'])
 def data():
     query = request.args.get('search')
+    print(query)
     return getData(query, chrome)
     
 # A method that runs the application server.

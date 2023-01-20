@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 import json
+from tqdm import tqdm
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import WebDriverWait
@@ -40,7 +41,7 @@ def obtenerProductosDetallados(lis, wd):
     '''
     page = []
         
-    for li in lis:
+    for li in tqdm(lis):
         link    =  li.cssselect('a')[1].get('href')
         precio  =  li.cssselect('span.price-tag-fraction')[0].text_content()
         titulo  =  li.cssselect('h2.ui-search-item__title')[0].text_content()
@@ -66,20 +67,22 @@ def getData(query, chrome):
     
     chrome.get("https://www.mercadolibre.com.ar/")
 
+    
     check_box_wait = EC.presence_of_element_located((By.ID, 'cb1-edit'))
     WebDriverWait(chrome, 5).until(check_box_wait)
 
     inputBusqueda = chrome.find_element(By.ID, 'cb1-edit')
     inputBusqueda.send_keys(query)
 
+    
     enter = chrome.find_element(By.CLASS_NAME,"nav-search-btn")
     enter.send_keys(Keys.ENTER)
 
     source_code = html.fromstring(chrome.page_source)
     lis = source_code.xpath('//li[@class="ui-search-layout__item"]')
+    if len(lis) == 0:
+      lis = source_code.xpath('//li[@class="ui-search-layout__item shops__layout-item"]')
     resultados = obtenerProductosDetallados(lis, chrome)
     
-    # with open("data.json", "w") as f:
-    #     json.dump(resultados, f)
 
     return jsonify(resultados)
