@@ -15,11 +15,10 @@ app = Flask(__name__)
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--headless')
-# chrome_options.add_argument("--disable-infobars")
-# chrome_options.add_argument('--disable-dev-shm-usage')
+chrome_options.binary_location = "/opt/render/project/chrome/chrome"
+chrome_driver_path = "/opt/render/project/chrome/chromedriver"
 
-
-chrome = webdriver.Chrome("/opt/render/project/chrome/chromedriver", chrome_options=chrome_options)
+chrome = webdriver.Chrome(chrome_driver_path, chrome_options=chrome_options)
 
 @app.route('/', methods=['GET'])
 def home():
