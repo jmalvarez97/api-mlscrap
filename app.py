@@ -15,7 +15,8 @@ app = Flask(__name__)
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--headless')
-chrome_options.binary_location = "/opt/render/project/chrome/google/chrome/google-chrome"
+#chrome_options.binary_location = "/opt/render/project/chrome/google/chrome/google-chrome"
+chrome_options.binary_location = "/opt/render/project/chrome/chromedriver"
 chrome_driver_path = "/opt/render/project/chrome/chromedriver"
 
 chrome = webdriver.Chrome(chrome_driver_path, chrome_options=chrome_options)
